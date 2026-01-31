@@ -1,91 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Posts – Filip Morawiec</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Math Posts</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      integrity="sha384-nB0miv6/jRmo5UMMR1WeZUIQ+TzD8p9p/9tV8q3vI1xE2dyp8aZ/2FZb7xZ7fT1N"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body data-page="posts">
+    <header class="topbar">
+      <a class="link" href="index.html">← Back home</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+      </button>
+    </header>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
+    <main class="posts-layout">
+      <aside class="post-list" id="post-list"></aside>
+      <article class="post-content" id="post-content">
+        <h1>Math Posts</h1>
+        <p>Select a post on the left to read it.</p>
+      </article>
+    </main>
 
-    header {
-      padding: 20px;
-      background: #f7f7f7;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    nav a {
-      margin-left: 15px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    #posts-list {
-      max-width: 800px;
-      margin: 40px auto;
-    }
-
-    .post-item {
-      margin-bottom: 20px;
-    }
-
-    .post-item a {
-      font-size: 20px;
-      color: #007acc;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Filip Morawiec personal page</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="posts.html">Posts</a>
-  </nav>
-</header>
-
-<div id="posts-list">
-  <h2>Posts</h2>
-</div>
-
-<script>
-  const postsList = document.getElementById('posts-list');
-
-  // Load posts/index.json
-  fetch('posts/index.json')
-    .then(res => res.json())
-    .then(posts => {
-      posts.forEach(post => {
-        const item = document.createElement('div');
-        item.className = 'post-item';
-        
-        item.innerHTML = `
-          <a href="posts/template.html?p=${post}">${post}</a>
-        `;
-        
-        postsList.appendChild(item);
-      });
-    })
-    .catch(err => {
-      postsList.innerHTML += "<p>Error loading posts.</p>";
-      console.error(err);
-    });
-</script>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+      integrity="sha384-3gQZpQ2M7qLkS6pP1sbXwG8XJ9h7myP4Hf1E1x0+9wX1LUWfu0gW5x9bwO1+XW0k"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQM9s1HI1rPpr4KfJ2ND5S+oP8KqA7QmP1Y4+QkFh4u/vq5Weky3Brd0B6t"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
 </html>
