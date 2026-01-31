@@ -161,9 +161,22 @@ a:hover {
 }
 
 .post-list a {
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 10px;
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-list small {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.post-list span {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .post-list a.active {
@@ -191,6 +204,11 @@ a:hover {
 
 .post-content code {
   font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+.post-content mjx-container[display='true'] {
+  display: block;
+  margin: 1rem 0;
 }
 
 @media (max-width: 900px) {
