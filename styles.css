@@ -59,8 +59,14 @@ a:hover {
   background: transparent;
   color: var(--text);
   border-radius: 999px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   cursor: pointer;
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-block;
 }
 
 .theme-toggle:hover {
