@@ -16,6 +16,12 @@ const POSTS = [
     title: 'Random Walks on Graphs',
     date: '2025-12-14',
     summary: 'A short intuition for transition matrices and steady state.'
+  },
+  {
+    slug: 'orthogonal-skip-connections',
+    title: 'Orthogonal skip connections',
+    date: '2026-02-10',
+    summary: 'Residual connections relax the loss landscape. Can we push further?'
   }
 ];
 
