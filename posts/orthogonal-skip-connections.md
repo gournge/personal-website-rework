@@ -101,4 +101,4 @@ $\mathcal{H} _{post}, \mathcal{H} _{pre}$ are mappings that enhance numerical st
 ## Some notes
 
 - In high dimensions random matrices are close to orthogonal, since 2 random vectors are close to orthogonal. We could somehow use that fact to train networks more efficiently, or obtain some exponential identities, like in case of Johnson-Lindenstrauss lemma.
-
+- To efficiently keep orthogonal matrices orthogonal, I borrowed an idea from the [Muon optimizer](https://kellerjordan.github.io/posts/muon/), which uses a Newton-Schulz iteration for this purpose.
