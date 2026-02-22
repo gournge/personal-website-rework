@@ -4,8 +4,8 @@ const POSTS = [
     title: 'Orthogonal skip connections',
     date: '2026-02-10',
     subtitle: 'Residual connections relax the loss landscape. Can we push further?',
-    image: 'posts/image.png',
-    imageAlt: 'Orthogonal skip connections vs identity skip connections'
+    image: 'posts/loss-landscapes.png',
+    imageAlt: 'Loss landscapes of ResNet56 with identity, orthogonal and no skip connections'
   }
 ];
 

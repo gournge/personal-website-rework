@@ -23,7 +23,7 @@ $$
 
 On the other hand, if we have skip connections, then a single block would contribute $ J_{f_l}(x_l) + I$ to the gradient through the network, so assuming each block is close to identity, these contributions will be negligible, so the gradient will not explode.
 
-It is therefore desirable to have $\|| I(x) \|| = \|| x \||$. But this is the exact defining property of orthogonal (or more generally, unitary) matrices. I think that **with orthogonal matrices we could have even deeper networks**. I think this is because a skip connection $W_i$ would now have more representational power, so it could absorb some more complexity from the function $f_i$. 
+It is therefore desirable to have $\|| I(x) \|| = \|| x \||$. But this is the exact defining property of orthogonal (or more generally, unitary) matrices. I think that **with orthogonal matrices we could enhance training deep networks**. I think this is because a skip connection $W_i$ would now have more representational power, so it could absorb some more complexity from the function $f_i$. 
 
 To support this claim, I proved this theorem, which is adopted from [this paper](https://arxiv.org/abs/1804.05012).
 
@@ -41,12 +41,35 @@ The proof is a lot of algebra, but the main idea is using the identity $\|| W(x)
 
 ## Practice
 
+### ReNet18, CIFAR10 
+
 <!-- ![Orthogonal skip connections vs identity skip connections](posts/image.png) -->
-<div style="display: flex; justify-content: center;">
-  <img src="posts/image.png" alt="Orthogonal skip connections vs identity skip connections" width="500"/>
-</div>
+<figure class="post-figure">
+  <img src="posts/image.png" alt="Orthogonal skip connections vs identity skip connections" width="500" />
+  <figcaption><strong>Figure 1:</strong> Training ResNet18 on CIFAR10 with identity vs orthogonal skip connections.</figcaption>
+</figure>
 
+Even though I thought orthogonal skip connections would enhance training deep networks, I wasn't able to show that empirically. On CIFAR10, I got similiar performance with both identity and orthogonal skip connections.
 
+To inspect it deeper, I looked at loss-landscapes of ResNet56 at CIFAR10 with identity and orthogonal skip connections, as well as without skip connections at all. I used the method described in [this paper](https://arxiv.org/abs/1712.09913) to visualize the loss landscape. 
+
+<figure class="post-figure">
+  <img src="posts/loss-landscapes.png" alt="Loss landscapes of ResNet56 with identity, orthogonal and no skip connections" width="700" />
+  <figcaption><strong>Figure 2:</strong> Loss landscapes of ResNet56 with: no skip connections, identity connections and orthogonal connections respectively. Capped at loss 20 for clarity.</figcaption>
+</figure>
+
+Unfortunately, orthogonal skip connections didn't lead to smoother loss landscapes in comparison to identity skip connections. 
+
+### Toy model 
+
+To gain some intuition, I trained a small 3-4 layer MLP with orthogonal skip connections on a classification of Gaussian blobs in dimensions 2 and 3.
+
+<figure class="post-figure">
+  <img src="posts/toy-model.png" alt="Orthogonal skip connections vs identity skip connections in a toy model" width="700" />
+  <figcaption><strong>Figure 3:</strong> Training a 4-layer MLP with orthogonal skip connections on a classification of Gaussian blobs in dimensions 2 and 3. Y axis represents the Lipchitz constant of the network, X axis represents deviation of blocks from identity.</figcaption>
+</figure>
+
+Interestingly, it looks like network doesn't obey the theoretical guarantees of the theorem, since as training progresses, the blocks deviate more and more from the orthogonal skip connections (lines curve to the right.) The Lipschitz constant of the network also increases, which is expected, as it measures more and more complex functions.
 
 ## Related work
 
@@ -81,8 +104,8 @@ The proof is a lot of algebra, but the main idea is using the identity $\|| W(x)
     <td>$\mathcal{H}_{post}^T f(\mathcal{H}_{pre} v) + \mathcal{H}_{res}(v)$</td>
     <td> ~$2\%$ improvement; $\mathcal{H}_{res}$ is a <a href="https://en.wikipedia.org/wiki/Convex_combination#Definition">convex combination</a> of permutation matrices</td>
     </td>
-    <!-- <td>No theoretical guarantees yet</td> -->
 </table>
+<figcaption><strong>Table 1:</strong> Comparison of different skip connections.</figcaption>
 </div>
 
 **Orthogonal skip connections**. [This paper](https://arxiv.org/abs/1707.05974) proposed orthogonal skip connections in 2017. They had similiar justifications - stability of the gradient flow - but they didn't provide any theoretical guarantees. It showed ~2% empirical improvements.

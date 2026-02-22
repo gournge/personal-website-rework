@@ -196,22 +196,35 @@ a:hover {
   gap: 4px;
 }
 
-.post-card strong,
-.post-list strong {
+.post-list-copy {
+  gap: 2px;
+}
+
+.post-card strong {
   font-size: 1.2rem;
   line-height: 1.2;
   font-weight: 700;
 }
 
-.post-card small,
-.post-list small {
+.post-list strong {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.post-card small {
   color: var(--muted);
   font-size: 0.82rem;
 }
 
+.post-list small {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
 .post-list span {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.64rem;
 }
 
 .post-card-image,
@@ -229,8 +242,8 @@ a:hover {
 }
 
 .post-list-image {
-  max-width: 108px;
-  height: 72px;
+  max-width: 72px;
+  height: 48px;
 }
 
 .link {
@@ -240,19 +253,67 @@ a:hover {
 
 .posts-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 220px minmax(0, 820px);
+  justify-content: center;
   gap: 24px;
-  padding: 24px 40px 64px;
+  padding: 24px 24px 64px;
+}
+
+.post-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-list-heading {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .post-list {
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 16px;
+  padding: 10px;
   background: var(--panel);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
+  font-size: 0.82rem;
+}
+
+.post-list a {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  border-radius: 10px;
+  padding: 8px 10px;
+  gap: 0;
+}
+
+.post-list a small,
+.post-list a .post-list-image {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.post-list a:hover,
+.post-list a:focus-visible {
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 8px;
+}
+
+.post-list a:hover small,
+.post-list a:hover .post-list-image,
+.post-list a:focus-visible small,
+.post-list a:focus-visible .post-list-image {
+  opacity: 1;
+  max-height: 120px;
+  pointer-events: auto;
 }
 
 .post-list a.active {
@@ -261,10 +322,12 @@ a:hover {
 }
 
 .post-content {
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px 32px;
-  background: var(--panel);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .post-content h1 {
@@ -287,6 +350,30 @@ a:hover {
   margin: 1rem 0;
 }
 
+.post-content figure,
+.post-content .post-figure {
+  margin: 1.25rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-content figure img,
+.post-content .post-figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.post-content figcaption,
+.post-content .post-figure figcaption {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
@@ -298,6 +385,10 @@ a:hover {
 
   .posts-layout {
     grid-template-columns: 1fr;
+  }
+
+  .post-list-wrap {
+    max-width: 560px;
   }
 }
 
@@ -327,12 +418,20 @@ a:hover {
   }
 
   .post-list a {
-    grid-template-columns: minmax(0, 1fr) 86px;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 7px 9px;
   }
 
-  .post-card strong,
-  .post-list strong {
+  .post-list {
+    padding: 12px;
+  }
+
+  .post-card strong {
     font-size: 1.05rem;
+  }
+
+  .post-list strong {
+    font-size: 0.84rem;
   }
 
   .post-card-image {
@@ -342,7 +441,7 @@ a:hover {
   }
 
   .post-list-image {
-    max-width: 86px;
-    height: 62px;
+    max-width: 64px;
+    height: 42px;
   }
 }
