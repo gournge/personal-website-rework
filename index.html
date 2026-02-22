@@ -6,7 +6,7 @@
     <title>Personal Website</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-page="home">
     <header class="topbar">
       <div class="brand">Filip Morawiec</div>
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
@@ -19,7 +19,7 @@
         <img class="avatar" src="assets/profile.jpg" alt="Profile" />
         <h1 class="name">Filip Morawiec</h1>
         <p class="bio">
-          CS + Math student at TU Delft building interpretable machine learning systems.
+          CS + Math student at TU Delft interested in machine learning systems. I like math.
         </p>
 
         <div class="socials">
@@ -57,31 +57,21 @@
                 <p class="resume-item-meta">Aug 2024 - Present | Warsaw, Poland</p>
               </header>
               <ul class="resume-points">
-                <li>Train interpretable MRI models and build data pipelines for hardware-collected datasets.</li>
-                <li>Create statistical group reports using robust covariance estimation and Bayesian error modeling for missing data.</li>
-                <li>Develop inverse-kinematics tools for multi-camera setups and research calibration and bundle-adjustment methods with custom constraints.</li>
+                <li>Researching diffusion models for MRI domain shifts on the <a href="https://icm.edu.pl/en/">ICM computer cluster</a>. Building data pipelines for datasets collected from our hardware.</li>
+                <li>Creating statistical group reports using robust covariance estimation and Bayesian error modeling for missing data.</li>
+                <li>Developed inverse-kinematics tools for multi-camera setups. Researching calibration and bundle-adjustment methods with custom constraints.</li>
               </ul>
             </article>
 
             <article class="resume-item">
               <header class="resume-item-head">
                 <h3>Machine Learning Intern | <a href="https://checkcells.com/">CheckCells</a></h3>
-                <p class="resume-item-meta">Summer 2023 | Remote</p>
+                <p class="resume-item-meta">Summer 2023 | Los Angeles, US</p>
               </header>
               <ul class="resume-points">
                 <li>Co-authored a patent.</li>
                 <li>Trained and integrated an open-source object detection model for sperm cell analysis.</li>
                 <li>Improved training efficiency by 10x through custom data augmentation.</li>
-              </ul>
-            </article>
-
-            <article class="resume-item">
-              <header class="resume-item-head">
-                <h3>Math Olympiad Tutor | III International Baccalaureate High School in Katowice</h3>
-                <p class="resume-item-meta">Oct 2022 - May 2024 | Katowice, Poland</p>
-              </header>
-              <ul class="resume-points">
-                <li>Mentored 15+ students and designed problem sets in algebra, number theory, and geometry.</li>
               </ul>
             </article>
           </div>
@@ -97,17 +87,54 @@
               </header>
               <ul class="resume-points">
                 <li><a href="https://www.teamepoch.ai/ai-cup-2026/">Epoch AI Kaggle contest</a>. Currently holding 1st place nationwide with our team Stochastic Gulls Descent. Build models for time series classification of bird trajectories. Contest webpage: <a href="https://www.teamepoch.ai/ai-cup-2026/">teamepoch.ai/ai-cup-2026</a></li>
+                <li>Completed a <a href="https://reit.pages.ewi.tudelft.nl/course-scalable-ai-101-on-daic/">course on Scalable AI</a> on the Delft Blue computer cluster.</li>
               </ul>
             </article>
 
             <article class="resume-item">
               <header class="resume-item-head">
-                <h3>University of Warsaw - BSc Mathematics (Transfer)</h3>
+                <h3>University of Warsaw | BSc Mathematics</h3>
                 <p class="resume-item-meta">Oct 2024 - Jun 2025 | Warsaw, Poland</p>
               </header>
               <ul class="resume-points">
                 <li>Contributed to a computer-vision-in-autonomous-driving book by synthesizing 50+ papers on object tracking.</li>
                 <li>Completed extended Analysis and Linear Algebra track (5/200 pass rate).</li>
+                <li>Transfered to TU Delft because it was higher in the rankings.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-block section-plain">
+          <h2>Other</h2>
+          <div class="resume-list">
+            <article class="resume-item">
+              <header class="resume-item-head">
+                <h3>Math Olympiad Tutor | III International Baccalaureate High School</h3>
+                <p class="resume-item-meta">Oct 2022 - May 2024 | Katowice, Poland</p>
+              </header>
+              <ul class="resume-points">
+                <li>Mentored 15+ students and designed problem sets in algebra, number theory, and geometry.</li>
+              </ul>
+            </article>
+
+            <article class="resume-item">
+              <header class="resume-item-head">
+                <h3>Algorytmion competitive programming contests</h3>
+                <p class="resume-item-meta">2023, 2024 | Gliwice, Poland</p>
+              </header>
+              <ul class="resume-points">
+                <li>Got a finalist title, top 10 in the country.</li>
+              </ul>
+            </article>
+
+            <article class="resume-item">
+              <header class="resume-item-head">
+                <h3>Hackathon Hack4Change </h3>
+                <p class="resume-item-meta">2024 | Gdańsk, Poland</p>
+              </header>
+              <ul class="resume-points">
+                <li>Won 2 main awards for an <a href="https://www.linkedin.com/feed/update/urn:li:activity:7213604913124159488/?originTrackingId=OnBa9uHCYRSZIdkg%2FoNfGw%3D%3D">app</a> that finds the shortest path with least solar exposure using live sun and building geometry data.</li>
               </ul>
             </article>
           </div>
@@ -115,7 +142,7 @@
 
         <section class="section-block section-posts">
           <h2>Posts</h2>
-          <p class="section-note">Math-related notes and short explainers.</p>
+          <!-- <p class="section-note">Math-related notes and short explainers.</p> -->
           <div class="home-post-list" id="home-post-list">
             <a class="post-card" href="posts.html?post=orthogonal-skip-connections">
               <div class="post-card-copy">

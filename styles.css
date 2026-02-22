@@ -49,6 +49,17 @@ a:hover {
   border-bottom: 1px solid var(--border);
 }
 
+body[data-page='home'] .topbar,
+body[data-page='home'] .layout {
+  padding-left: clamp(48px, 8vw, 160px);
+  padding-right: clamp(48px, 8vw, 160px);
+}
+
+body[data-page='home'] .layout {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 .brand {
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -463,6 +474,14 @@ a:hover {
 
   .layout,
   .posts-layout {
+    padding: 20px;
+  }
+
+  body[data-page='home'] .topbar {
+    padding: 16px 20px;
+  }
+
+  body[data-page='home'] .layout {
     padding: 20px;
   }
 
