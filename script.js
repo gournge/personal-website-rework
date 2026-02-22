@@ -37,6 +37,17 @@ const postList = document.getElementById('post-list');
 const postContent = document.getElementById('post-content');
 const homePostList = document.getElementById('home-post-list');
 
+const setLinksTargetBlank = (scope = document) => {
+  scope.querySelectorAll('a[href]').forEach((link) => {
+    link.setAttribute('target', '_blank');
+
+    const relTokens = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+    relTokens.add('noopener');
+    relTokens.add('noreferrer');
+    link.setAttribute('rel', Array.from(relTokens).join(' '));
+  });
+};
+
 const renderHomePostList = () => {
   if (!homePostList) {
     return;
@@ -58,6 +69,8 @@ const renderHomePostList = () => {
       </a>
     `;
   }).join('');
+
+  setLinksTargetBlank(homePostList);
 };
 
 const renderPostList = (activeSlug) => {
@@ -83,6 +96,8 @@ const renderPostList = (activeSlug) => {
       </a>
     `;
   }).join('');
+
+  setLinksTargetBlank(postList);
 };
 
 const typesetMath = () => {
@@ -112,6 +127,7 @@ const renderMarkdown = (markdown) => {
     postContent.textContent = markdown;
   }
 
+  setLinksTargetBlank(postContent);
   typesetMath();
 };
 
@@ -148,6 +164,7 @@ const loadPost = async () => {
 };
 
 renderHomePostList();
+setLinksTargetBlank();
 
 if (postContent) {
   loadPost();

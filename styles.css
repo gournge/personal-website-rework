@@ -194,7 +194,10 @@ body[data-page='home'] .layout {
   margin-top: 8px;
 }
 
-.section-plain a[href^='http']::after {
+.section-plain a[href]::after,
+.sidebar a[href]::after,
+.post-content a[href]::after,
+body[data-page='posts'] .topbar a[href]::after {
   content: '↗';
   display: inline-block;
   margin-left: 0.28rem;
@@ -204,8 +207,17 @@ body[data-page='home'] .layout {
   transition: transform 0.16s ease;
 }
 
-.section-plain a[href^='http']:hover::after {
+.section-plain a[href]:hover::after,
+.sidebar a[href]:hover::after,
+.post-content a[href]:hover::after,
+body[data-page='posts'] .topbar a[href]:hover::after {
   transform: translate(1px, -1px);
+}
+
+.sidebar .socials a::after,
+.post-card::after,
+.post-list a::after {
+  content: none;
 }
 
 .resume-list {
