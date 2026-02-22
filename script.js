@@ -1,23 +1,5 @@
 const POSTS = [
   {
-    slug: 'matrix-computation',
-    title: 'Matrix Computation Walkthrough',
-    date: '2026-01-31',
-    summary: 'A quick example of multiplying two small matrices by hand.'
-  },
-  {
-    slug: 'first-steps',
-    title: 'First Steps with Fourier Series',
-    date: '2025-11-02',
-    summary: 'Warm-up notes on decomposing periodic signals.'
-  },
-  {
-    slug: 'graph-walks',
-    title: 'Random Walks on Graphs',
-    date: '2025-12-14',
-    summary: 'A short intuition for transition matrices and steady state.'
-  },
-  {
     slug: 'orthogonal-skip-connections',
     title: 'Orthogonal skip connections',
     date: '2026-02-10',
