@@ -138,6 +138,27 @@ body[data-page='home'] .layout {
   fill: currentColor;
 }
 
+.sidebar-feature {
+  margin: 22px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-feature-image {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.sidebar-feature-copy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
 .content {
   display: flex;
   flex-direction: column;
