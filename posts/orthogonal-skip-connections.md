@@ -23,7 +23,7 @@ $$
 
 On the other hand, if we have skip connections, then a single block would contribute $ J_{f_l}(x_l) + I$ to the gradient through the network, so assuming each block is close to identity, these contributions will be negligible, so the gradient will not explode.
 
-It is therefore desirable to have $\|| I(x) \|| = \|| x \||$. But this is the exact defining property of orthogonal (or more generally, unitary) matrices. I think that **with orthogonal matrices we could enhance training deep networks**. I think this is because a skip connection $W_i$ would now have more representational power, so it could absorb some more complexity from the function $f_i$. 
+It is therefore desirable to have $\|| I(x) \|| = \|| x \||$. But this is the exact defining property of orthogonal (or more generally, unitary) matrices. I think that **with orthogonal matrices we could enhance training deep networks**. I think this is because a skip connection $W_i$ would now have more representational power, so it could absorb some more complexity from the function $f_i$. By a similiar argument, [this paper](https://arxiv.org/abs/1707.05974) proposed orthogonal skip connections in 2017.
 
 To support this claim, I proved this theorem, which is adopted from [this paper](https://arxiv.org/abs/1804.05012).
 
@@ -49,7 +49,7 @@ The proof is a lot of algebra, but the main idea is using the identity $\|| W(x)
   <figcaption><strong>Figure 1:</strong> Training ResNet18 on CIFAR10 with identity vs orthogonal skip connections.</figcaption>
 </figure>
 
-Even though I thought orthogonal skip connections would enhance training deep networks, I wasn't able to show that empirically. On CIFAR10, I got similiar performance with both identity and orthogonal skip connections.
+Even though I thought orthogonal skip connections would enhance training deep networks, I wasn't able to show that empirically. On CIFAR10, I got similiar performance with both identity and orthogonal skip connections. This is in contrary to the results of [this paper](https://arxiv.org/abs/1707.05974), which showed ~2% improvement with orthogonal skip connections.
 
 To inspect it deeper, I looked at loss-landscapes of ResNet56 at CIFAR10 with identity and orthogonal skip connections, as well as without skip connections at all. I used the method described in [this paper](https://arxiv.org/abs/1712.09913) to visualize the loss landscape. 
 
