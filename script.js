@@ -13,15 +13,22 @@ const themeToggle = document.getElementById('theme-toggle');
 
 if (themeToggle) {
   const root = document.documentElement;
+  const themeLabel = themeToggle.querySelector('.theme-label');
   const savedTheme = localStorage.getItem('theme');
+  const applyTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    if (themeLabel) {
+      themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+    }
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+  };
 
-  if (savedTheme) {
-    root.setAttribute('data-theme', savedTheme);
-  }
+  applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
 
   themeToggle.addEventListener('click', () => {
     const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', nextTheme);
+    applyTheme(nextTheme);
     localStorage.setItem('theme', nextTheme);
   });
 }
