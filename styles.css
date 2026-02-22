@@ -178,6 +178,10 @@ a:hover {
   align-items: center;
 }
 
+.post-card {
+  grid-template-columns: minmax(0, 1fr) 324px;
+}
+
 .post-card:hover,
 .post-list a:hover {
   text-decoration: none;
@@ -213,12 +217,20 @@ a:hover {
 .post-card-image,
 .post-list-image {
   width: 100%;
-  max-width: 108px;
-  height: 72px;
   object-fit: cover;
   border-radius: 10px;
   border: 1px solid var(--border);
   justify-self: end;
+}
+
+.post-card-image {
+  max-width: 324px;
+  height: 216px;
+}
+
+.post-list-image {
+  max-width: 108px;
+  height: 72px;
 }
 
 .link {
@@ -306,8 +318,16 @@ a:hover {
 
   .post-card,
   .post-list a {
-    grid-template-columns: minmax(0, 1fr) 86px;
     padding: 12px;
+  }
+
+  .post-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .post-list a {
+    grid-template-columns: minmax(0, 1fr) 86px;
   }
 
   .post-card strong,
@@ -315,7 +335,12 @@ a:hover {
     font-size: 1.05rem;
   }
 
-  .post-card-image,
+  .post-card-image {
+    max-width: 258px;
+    height: 186px;
+    justify-self: start;
+  }
+
   .post-list-image {
     max-width: 86px;
     height: 62px;
