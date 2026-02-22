@@ -3,7 +3,9 @@ const POSTS = [
     slug: 'orthogonal-skip-connections',
     title: 'Orthogonal skip connections',
     date: '2026-02-10',
-    summary: 'Residual connections relax the loss landscape. Can we push further?'
+    subtitle: 'Residual connections relax the loss landscape. Can we push further?',
+    image: 'posts/image.png',
+    imageAlt: 'Orthogonal skip connections vs identity skip connections'
   }
 ];
 
@@ -26,6 +28,30 @@ if (themeToggle) {
 
 const postList = document.getElementById('post-list');
 const postContent = document.getElementById('post-content');
+const homePostList = document.getElementById('home-post-list');
+
+const renderHomePostList = () => {
+  if (!homePostList) {
+    return;
+  }
+
+  homePostList.innerHTML = POSTS.map((post) => {
+    const subtitle = post.subtitle || post.summary || '';
+    const imageMarkup = post.image
+      ? `<img class="post-card-image" src="${post.image}" alt="${post.imageAlt || `${post.title} preview`}" loading="lazy" />`
+      : '';
+
+    return `
+      <a class="post-card" href="posts.html?post=${post.slug}">
+        <div class="post-card-copy">
+          <strong>${post.title}</strong>
+          <small>${subtitle}</small>
+        </div>
+        ${imageMarkup}
+      </a>
+    `;
+  }).join('');
+};
 
 const renderPostList = (activeSlug) => {
   if (!postList) {
@@ -34,11 +60,19 @@ const renderPostList = (activeSlug) => {
 
   postList.innerHTML = POSTS.map((post) => {
     const activeClass = post.slug === activeSlug ? 'active' : '';
+    const subtitle = post.subtitle || post.summary || '';
+    const imageMarkup = post.image
+      ? `<img class="post-list-image" src="${post.image}" alt="${post.imageAlt || `${post.title} preview`}" loading="lazy" />`
+      : '';
+
     return `
       <a class="${activeClass}" href="posts.html?post=${post.slug}">
-        <strong>${post.title}</strong>
-        <small>${post.date}</small>
-        <span>${post.summary}</span>
+        <div class="post-list-copy">
+          <strong>${post.title}</strong>
+          <small>${subtitle}</small>
+          <span>${post.date}</span>
+        </div>
+        ${imageMarkup}
       </a>
     `;
   }).join('');
@@ -105,6 +139,8 @@ const loadPost = async () => {
     `;
   }
 };
+
+renderHomePostList();
 
 if (postContent) {
   loadPost();

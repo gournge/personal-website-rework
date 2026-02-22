@@ -49,7 +49,7 @@
       </aside>
 
       <section class="content">
-        <section class="panel">
+        <section class="section-block section-plain">
           <h2>Experience</h2>
           <ul>
             <li>Research Intern — Optimization Lab (2025)</li>
@@ -57,7 +57,7 @@
           </ul>
         </section>
 
-        <section class="panel">
+        <section class="section-block section-plain">
           <h2>Projects</h2>
           <ul>
             <li>Convex solver for large-scale linear programs</li>
@@ -66,12 +66,23 @@
           </ul>
         </section>
 
-        <section class="panel">
+        <section class="section-block section-posts">
           <h2>Posts</h2>
-          <p>Math-related notes and short explainers.</p>
-          <ul>
-            <li><a href="posts.html?post=orthogonal-skip-connections">Orthogonal skip connections</a></li>
-          </ul>
+          <p class="section-note">Math-related notes and short explainers.</p>
+          <div class="home-post-list" id="home-post-list">
+            <a class="post-card" href="posts.html?post=orthogonal-skip-connections">
+              <div class="post-card-copy">
+                <strong>Orthogonal skip connections</strong>
+                <small>Residual connections relax the loss landscape. Can we push further?</small>
+              </div>
+              <img
+                class="post-card-image"
+                src="posts/image.png"
+                alt="Orthogonal skip connections vs identity skip connections"
+                loading="lazy"
+              />
+            </a>
+          </div>
           <a class="link" href="posts.html">View all posts →</a>
         </section>
       </section>

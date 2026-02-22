@@ -130,18 +130,95 @@ a:hover {
 .content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
 }
 
-.panel {
-  border: 1px solid var(--border);
-  padding: 20px 24px;
-  border-radius: 16px;
-  background: var(--panel);
-}
-
-.panel h2 {
+.section-block h2 {
   margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.section-note {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.section-plain {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.section-plain ul {
+  margin-top: 8px;
+}
+
+.section-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-card,
+.post-list a {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--panel);
+  color: var(--text);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 108px;
+  gap: 14px;
+  align-items: center;
+}
+
+.post-card:hover,
+.post-list a:hover {
+  text-decoration: none;
+  border-color: var(--link);
+}
+
+.post-card-copy,
+.post-list-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-card strong,
+.post-list strong {
+  font-size: 1.2rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.post-card small,
+.post-list small {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.post-list span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.post-card-image,
+.post-list-image {
+  width: 100%;
+  max-width: 108px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  justify-self: end;
 }
 
 .link {
@@ -163,31 +240,12 @@ a:hover {
   background: var(--panel);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.post-list a {
-  padding: 10px 12px;
-  border-radius: 10px;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.post-list small {
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-
-.post-list span {
-  color: var(--muted);
-  font-size: 0.9rem;
+  gap: 10px;
 }
 
 .post-list a.active {
   background: var(--bg);
-  border: 1px solid var(--border);
+  border-color: var(--link);
 }
 
 .post-content {
@@ -244,5 +302,22 @@ a:hover {
   .avatar {
     width: 120px;
     height: 120px;
+  }
+
+  .post-card,
+  .post-list a {
+    grid-template-columns: minmax(0, 1fr) 86px;
+    padding: 12px;
+  }
+
+  .post-card strong,
+  .post-list strong {
+    font-size: 1.05rem;
+  }
+
+  .post-card-image,
+  .post-list-image {
+    max-width: 86px;
+    height: 62px;
   }
 }
