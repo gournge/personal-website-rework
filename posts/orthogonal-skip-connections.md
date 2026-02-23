@@ -39,6 +39,10 @@ So in plain words: **we can approximate functions with near-orthogonal matrices*
 
 The proof is a lot of algebra, but the main idea is using the identity $\|| W(x) \|| = \|| x \||$. I wasn't able to prove a version of the theorem without the constraint of $\|| I - W_i\||$ decreasing.
 
+> **Note**: $\|| \cdot \||_L$ stands for the Lipschitz norm $\|| f \||_L = \text{sup} _{x \neq y} \frac{\|| f(x) - f(y) \||}{\|| x - y \||}$
+
+<!-- $\text{sup}_{x \neq y} \frac{\|| f(x) - f(y) \||}{\|| x - y \||}$ -->
+
 ## Practice
 
 ### ReNet18, CIFAR10 
@@ -74,39 +78,41 @@ Interestingly, it looks like network doesn't obey the theoretical guarantees of 
 ## Related work
 
 <!-- Table comparing 3 versions of \texttt{block}(v) -->
-<div style="display: flex; justify-content: center;">
-<table style="border-collapse: collapse; width: 80%; text-align: left; font-size: 16px;">
-  <tr>
-    <th>Connection</th>
-    <th>$\texttt{block}(v)$</th>
-    <th>Notes</th>
-  </tr>
-  <tr>
-    <td>Identity skip connections</td>
-    <td>$f(v) + v$</td>
-    <td>ResNet paper baseline</td>
-    <!-- <td>ResNet paper [cite]</td> -->
-  </tr>
-  <tr>
-    <td>Orthogonal skip connections</td>
-    <td>$f(v) + W_iv$</td>
-    <td>This post; ~$2\%$ improvement</td>
-    <!-- <td>This post (see theorem above)</td> -->
-  </tr>
-  <tr>
-    <td>Orthogonal projections in skip connections</td>
-    <td>$P_v(f(v)) + v$</td>
-    <td>~$2\%$ improvement</td>
-    <!-- <td>No theoretical guarantees yet</td> -->
-  </tr>
-  <tr>
-    <td>(Manifold-Constrained) Hyper-Connections</td>
-    <td>$\mathcal{H}_{post}^T f(\mathcal{H}_{pre} v) + \mathcal{H}_{res}(v)$</td>
-    <td> ~$2\%$ improvement; $\mathcal{H}_{res}$ is a <a href="https://en.wikipedia.org/wiki/Convex_combination#Definition">convex combination</a> of permutation matrices</td>
-    </td>
-</table>
-<figcaption><strong>Table 1:</strong> Comparison of different skip connections.</figcaption>
-</div>
+<figure class="post-figure post-table-figure">
+  <div class="post-table-scroll">
+    <table class="post-compare-table">
+      <tr>
+        <th>Connection</th>
+        <th>$\texttt{block}(v)$</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td>Identity skip connections</td>
+        <td>$f(v) + v$</td>
+        <td>ResNet paper baseline</td>
+        <!-- <td>ResNet paper [cite]</td> -->
+      </tr>
+      <tr>
+        <td>Orthogonal skip connections</td>
+        <td>$f(v) + W_iv$</td>
+        <td>This post; ~$2\%$ improvement</td>
+        <!-- <td>This post (see theorem above)</td> -->
+      </tr>
+      <tr>
+        <td>Orthogonal projections in skip connections</td>
+        <td>$P_v(f(v)) + v$</td>
+        <td>~$2\%$ improvement</td>
+        <!-- <td>No theoretical guarantees yet</td> -->
+      </tr>
+      <tr>
+        <td>(Manifold-Constrained) Hyper-Connections</td>
+        <td>$\mathcal{H}_{post}^T f(\mathcal{H}_{pre} v) + \mathcal{H}_{res}(v)$</td>
+        <td>~$2\%$ improvement; $\mathcal{H}_{res}$ is a <a href="https://en.wikipedia.org/wiki/Convex_combination#Definition">convex combination</a> of permutation matrices</td>
+      </tr>
+    </table>
+  </div>
+  <figcaption><strong>Table 1:</strong> Comparison of different skip connections.</figcaption>
+</figure>
 
 **Orthogonal skip connections**. [This paper](https://arxiv.org/abs/1707.05974) proposed orthogonal skip connections in 2017. They had similiar justifications - stability of the gradient flow - but they didn't provide any theoretical guarantees. It showed ~2% empirical improvements.
 

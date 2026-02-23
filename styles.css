@@ -196,8 +196,7 @@ body[data-page='home'] .layout {
 
 .section-plain a[href]::after,
 .sidebar a[href]::after,
-.post-content a[href]::after,
-body[data-page='posts'] .topbar a[href]::after {
+.post-content a[href]::after {
   content: '↗';
   display: inline-block;
   margin-left: 0.28rem;
@@ -209,8 +208,7 @@ body[data-page='posts'] .topbar a[href]::after {
 
 .section-plain a[href]:hover::after,
 .sidebar a[href]:hover::after,
-.post-content a[href]:hover::after,
-body[data-page='posts'] .topbar a[href]:hover::after {
+.post-content a[href]:hover::after {
   transform: translate(1px, -1px);
 }
 
@@ -465,6 +463,9 @@ body[data-page='posts'] .topbar a[href]:hover::after {
 .post-content mjx-container[display='true'] {
   display: block;
   margin: 1rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .post-content figure,
@@ -491,6 +492,41 @@ body[data-page='posts'] .topbar a[href]:hover::after {
   line-height: 1.5;
 }
 
+.post-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.post-content .post-table-figure {
+  align-items: stretch;
+}
+
+.post-content .post-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.post-content .post-compare-table {
+  display: table;
+  width: min(100%, 920px);
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: clamp(0.72rem, 1.8vw, 1rem);
+  line-height: 1.45;
+}
+
+.post-content .post-compare-table th,
+.post-content .post-compare-table td {
+  border: 1px solid var(--border);
+  padding: 0.55em 0.7em;
+  vertical-align: top;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
@@ -506,6 +542,11 @@ body[data-page='posts'] .topbar a[href]:hover::after {
 
   .post-list-wrap {
     max-width: 560px;
+    width: 100%;
+  }
+
+  .post-content {
+    min-width: 0;
   }
 }
 
@@ -540,6 +581,7 @@ body[data-page='posts'] .topbar a[href]:hover::after {
   .post-card {
     grid-template-columns: 1fr;
     gap: 10px;
+    align-items: start;
   }
 
   .post-list a {
@@ -560,9 +602,11 @@ body[data-page='posts'] .topbar a[href]:hover::after {
   }
 
   .post-card-image {
-    max-width: 258px;
-    height: 186px;
-    justify-self: start;
+    max-width: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    justify-self: stretch;
   }
 
   .resume-item + .resume-item {
