@@ -1,5 +1,14 @@
 const POSTS = [
   {
+    slug: 'tanaka',
+    title: 'Itô–Tanaka Certificates',
+    date: '2026-07-31',
+    subtitle: 'Neural supermartingale certificates beyond twice-differentiable functions.',
+    image: 'tanaka/ideal-example.png',
+    imageAlt: 'Ideal reach–avoid certificate and stopped trajectories',
+    href: 'tanaka/'
+  },
+  {
     slug: 'orthogonal-skip-connections',
     title: 'Orthogonal skip connections',
     date: '2026-02-10',
@@ -38,7 +47,7 @@ const postContent = document.getElementById('post-content');
 const homePostList = document.getElementById('home-post-list');
 
 const setLinksTargetBlank = (scope = document) => {
-  scope.querySelectorAll('a[href]').forEach((link) => {
+  scope.querySelectorAll('a[href]:not([data-same-tab])').forEach((link) => {
     link.setAttribute('target', '_blank');
 
     const relTokens = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
@@ -60,10 +69,11 @@ const renderHomePostList = () => {
       : '';
 
     return `
-      <a class="post-card" href="posts.html?post=${post.slug}">
+      <a class="post-card" href="${post.href || `posts.html?post=${post.slug}`}">
         <div class="post-card-copy">
           <strong>${post.title}</strong>
           <small>${subtitle}</small>
+          <span class="post-card-date">${post.date}</span>
         </div>
         ${imageMarkup}
       </a>
@@ -86,7 +96,7 @@ const renderPostList = (activeSlug) => {
       : '';
 
     return `
-      <a class="${activeClass}" href="posts.html?post=${post.slug}">
+      <a class="${activeClass}" href="${post.href || `posts.html?post=${post.slug}`}">
         <div class="post-list-copy">
           <strong>${post.title}</strong>
           <small>${subtitle}</small>

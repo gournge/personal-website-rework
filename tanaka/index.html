@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Itô–Tanaka Certificates: neural supermartingale certificates for piecewise-smooth functions."
+    />
+    <title>Itô–Tanaka Certificates | Filip Morawiec</title>
+    <link rel="icon" href="../assets/favicon-fm.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body data-page="tanaka">
+    <header class="topbar tanaka-topbar">
+      <a class="link" href="../" data-same-tab>← Filip Morawiec</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+        <span class="theme-label">Theme</span>
+      </button>
+    </header>
+
+    <main class="tanaka-article">
+      <header class="tanaka-header">
+        <h1>Itô–Tanaka Certificates</h1>
+        <p class="tanaka-byline">
+          <a href="https://filipmorawiec.com">Filip Morawiec</a><br />
+          University of Birmingham<br />
+          July 2026
+        </p>
+      </header>
+
+      <p class="tanaka-summary">
+        In this post, I describe how neural supermartingale certificates can remain
+        valid even when they have kinks. The key is to replace the ordinary Itô
+        formula with the Itô–Tanaka–Meyer formula, which explicitly accounts for
+        the local time accumulated at interfaces.
+      </p>
+
+      <p class="tanaka-links">
+        <a href="poster.pdf">Poster</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/gournge/tanaka-certificates">Code</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/gournge/tanaka-certificates/tree/main/docs/research/pdf">Research notes</a>
+      </p>
+
+      <h2>Safety certificates for stochastic systems</h2>
+
+      <p>
+        Consider a stochastic differential equation
+        $dX_t=f(X_t)dt+\sigma(X_t)dW_t$. Given initial, target, and unsafe sets,
+        we want to bound the probability of reaching the unsafe set or leaving the
+        certified domain before reaching the target.
+      </p>
+
+      <p>
+        A nonnegative function $V$ provides such a bound when it is small on the
+        initial set, large on the failure boundary, and $V(X_{t\wedge\tau})$ is a
+        supermartingale. In that case,
+      </p>
+
+      <div class="tanaka-equation">
+        \[
+          \mathbb P(\text{unsafe or domain exit before target})
+          \leq \frac{\alpha}{\beta}.
+        \]
+      </div>
+
+      <figure class="tanaka-figure tanaka-figure-wide">
+        <img
+          src="ideal-example.png"
+          alt="Ideal martingale certificate, stopped stochastic trajectories, and their empirical mean"
+        />
+        <figcaption>
+          An ideal reach–avoid certificate and realizations of the stopped process
+          $V(X_{t\wedge\tau})$.
+        </figcaption>
+      </figure>
+
+      <h2>What changes when the certificate has kinks?</h2>
+
+      <p>
+        Previous neural certificate work assumes $V\in C^2$. ReLU-based functions
+        are only piecewise smooth: their gradients jump across activation facets.
+        The multidimensional Itô–Tanaka formula adds a surface-local-time term for
+        each shared facet $F$:
+      </p>
+
+      <div class="tanaka-equation">
+        \[
+        V(X_{t\wedge\tau}) = V(X_0)
+        + \int_0^{t\wedge\tau}\mathcal LV(X_s)\,ds + M_t
+        + \frac12\sum_F\int_0^{t\wedge\tau}\gamma_F(X_s)\,dL_s^F,
+        \]
+      </div>
+
+      <p>
+        where $\gamma_F=(\nabla V_j-\nabla V_i)^\top n_{i\to j,F}$ is the jump
+        in the normal derivative. Since local time is nondecreasing, the stopped
+        process is a supermartingale when both the ordinary generator contribution
+        and every interface contribution are nonpositive:
+      </p>
+
+      <div class="tanaka-equation">
+        \[
+          \mathcal LV_i(x)\leq 0,
+          \qquad
+          \gamma_F(x)\leq 0.
+        \]
+      </div>
+
+      <h2>Why piecewise quadratic?</h2>
+
+      <p>
+        A plain ReLU network is affine inside each activation cell, so it has no
+        classical curvature there. For diffusions, this can make the generator
+        inequality impossible even in a simple one-dimensional example. A
+        piecewise-quadratic network retains compact ReLU partitions while adding the
+        Hessian term needed to counteract drift.
+      </p>
+
+      <p>
+        I also considered a residual architecture
+        $V_\theta=\rho(S_\theta-C_\psi)$, where $S_\theta$ is $C^1$ and
+        piecewise quadratic, and $C_\psi$ is a convex ReLU input-convex neural
+        network. Convexity makes the gradient jumps of $C_\psi$ nonnegative;
+        subtracting it gives every interface the safe sign automatically.
+      </p>
+
+      <h2 id="verified-experiment">A verified experiment</h2>
+
+      <p>
+        On a two-dimensional Ornstein–Uhlenbeck benchmark, I first approximated a
+        Poisson solution, fixed the resulting quadratic features, and fitted their
+        coefficients with linear programming. The verifier checked all 1,177
+        discovered cells with no unresolved cells for $\alpha=1.97$, $\beta=2$,
+        and $\epsilon=0.1$. This gives a valid but loose failure-probability bound
+        of $0.985$.
+      </p>
+
+      <figure class="tanaka-figure">
+        <img
+          src="verified-certificate.png"
+          alt="Poisson teacher, verified certificate, approximation error, and verified generator for the two-dimensional Ornstein–Uhlenbeck benchmark"
+        />
+        <figcaption>
+          Poisson teacher, verified certificate, approximation error, and verified
+          generator. The white contour is the stopping level $V=\beta$.
+        </figcaption>
+      </figure>
+
+      <h2>Limitations and next steps</h2>
+
+      <p>
+        The verified result is still limited to a simplified two-dimensional
+        setting. The ICNN branch was disabled in the final LP-fitted certificate,
+        and Adam did not produce a certificate satisfying all conditions at once.
+        Exact cell discovery is also the main scaling bottleneck.
+      </p>
+
+      <p>
+        The next verification direction is bound propagation with adaptive domain
+        splitting. The architecture can continue to guarantee the local-time sign,
+        while the verifier concentrates on value and generator inequalities.
+      </p>
+
+      <h3>Acknowledgments</h3>
+
+      <p>
+        This work was completed during the 2026 University of Birmingham Summer
+        Research Programme in AI Safety, supervised by Grigory Neustroev in the lab
+        of Prof. Mirco Giacobbe.
+      </p>
+    </main>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
