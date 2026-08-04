@@ -159,6 +159,50 @@
         </figcaption>
       </figure>
 
+      <h2 id="try-it">Try the verifier</h2>
+
+      <p>
+        Clone the project and create its locked development environment with
+        <a href="https://docs.astral.sh/uv/">uv</a>:
+      </p>
+
+      <figure class="tanaka-code-example">
+        <figcaption>Set up the project</figcaption>
+        <pre class="tanaka-code tanaka-code-shell"><code><span class="code-line"><span class="code-command">git</span> clone <a href="https://github.com/gournge/tanaka-certificates">https://github.com/gournge/tanaka-certificates.git</a></span>
+<span class="code-line"><span class="code-command">cd</span> tanaka-certificates</span>
+<span class="code-line"><span class="code-command">uv</span> sync --dev  <span class="code-comment"># Recommended: installs the locked environment.</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment"># Without uv, create and activate a virtual environment, then:</span></span>
+<span class="code-line">python -m pip install -e .</span></code></pre>
+      </figure>
+
+      <p>
+        The following reproduces the core verification flow for the
+        piecewise-quadratic Ornstein–Uhlenbeck certificate. Training is currently
+        specialized to this benchmark.
+      </p>
+
+      <figure class="tanaka-code-example">
+        <figcaption>Verify a piecewise-quadratic certificate</figcaption>
+        <pre class="tanaka-code tanaka-code-python"><code><span class="code-line"><span class="code-keyword">from</span> tanaka_certificates.nn.train_fixed_pwq_lp <span class="code-keyword">import</span> train_fixed_pwq_lp</span>
+<span class="code-line"><span class="code-keyword">from</span> tanaka_certificates.problems <span class="code-keyword">import</span> make_enlarged_target_ou_problem</span>
+<span class="code-line"><span class="code-keyword">from</span> tanaka_certificates.verifier <span class="code-keyword">import</span> (</span>
+<span class="code-line">    VerifierLocalTimeByConstruction,</span>
+<span class="code-line">    VerifierPiecewiseQuadratic,</span>
+<span class="code-line">)</span>
+<span class="code-line"></span>
+<span class="code-line">sde, problem = make_enlarged_target_ou_problem()</span>
+<span class="code-line">model, _ = train_fixed_pwq_lp()  <span class="code-comment"># Specialized to this problem for now.</span></span>
+<span class="code-line">model.eval()</span>
+<span class="code-line">verifier = VerifierLocalTimeByConstruction(sde, problem, model)</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment"># Use this when local-time safety is not guaranteed by construction:</span></span>
+<span class="code-line"><span class="code-comment"># verifier = VerifierPiecewiseQuadratic(sde, problem, model)</span></span>
+<span class="code-line"></span>
+<span class="code-line">verification = verifier.verify()</span>
+<span class="code-line"><span class="code-keyword">assert</span> verification.value == <span class="code-string">"verified"</span></span></code></pre>
+      </figure>
+
       <h2>Limitations and next steps</h2>
 
       <p>

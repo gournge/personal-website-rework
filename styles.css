@@ -914,6 +914,88 @@ body[data-page='tanaka'] {
   text-align: center;
 }
 
+.tanaka-code-example {
+  margin: 26px 0 34px;
+}
+
+.tanaka-code-example figcaption {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.tanaka-code {
+  margin: 0;
+  padding: 16px 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: clamp(0.72rem, 1.8vw, 0.84rem);
+  line-height: 1.58;
+  tab-size: 4;
+}
+
+.tanaka-code code {
+  display: block;
+  min-width: max-content;
+  counter-reset: code-line;
+  line-height: 0;
+}
+
+.tanaka-code .code-line {
+  display: block;
+  min-height: 1.58em;
+  padding: 0 18px 0 0;
+  counter-increment: code-line;
+  line-height: 1.58;
+  white-space: pre;
+}
+
+.tanaka-code .code-line::before {
+  content: counter(code-line);
+  display: inline-block;
+  width: 3.4em;
+  margin-right: 1.25em;
+  color: var(--muted);
+  text-align: right;
+  opacity: 0.65;
+  user-select: none;
+}
+
+.tanaka-code .code-keyword,
+.tanaka-code .code-command {
+  color: var(--project-blue);
+  font-weight: 650;
+}
+
+.tanaka-code .code-comment {
+  color: #2e7d5b;
+  font-style: italic;
+}
+
+.tanaka-code .code-string {
+  color: #b9413e;
+}
+
+.tanaka-code a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 0.18em;
+}
+
+:root[data-theme='dark'] .tanaka-code .code-comment {
+  color: #75c99f;
+}
+
+:root[data-theme='dark'] .tanaka-code .code-string {
+  color: #f08b87;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
