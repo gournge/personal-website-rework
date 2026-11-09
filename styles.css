@@ -868,6 +868,24 @@ body[data-page='tanaka'] {
   overflow-y: hidden;
 }
 
+.tanaka-note {
+  margin: 32px 0;
+  padding: 14px 20px;
+  border-left: 4px solid var(--link);
+  background: var(--panel);
+  font-size: 0.95rem;
+}
+
+.tanaka-note .tanaka-note-title {
+  margin-bottom: 8px;
+  color: var(--link);
+  font-weight: 600;
+}
+
+.tanaka-note p:last-child {
+  margin-bottom: 0;
+}
+
 .tanaka-equation mjx-container[display='true'] {
   margin: 0.75rem 0;
 }
